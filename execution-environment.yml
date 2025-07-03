@@ -78,7 +78,18 @@ dependencies:
       - python3
       - python3-devel
       - python3-rpm
-      - iwl*
+      - iwl100-firmware
+      - iwl1000-firmware
+      - iwl105-firmware
+      - iwl135-firmware
+      - iwl2000-firmware
+      - iwl2030-firmware
+      - iwl3160-firmware
+      - iwl5000-firmware
+      - iwl5150-firmware
+      - iwl6000g2a-firmware
+      - iwl6050-firmware
+      - iwl7260-firmware
 additional_build_files:
   - src: sudoers
     dest: configs
