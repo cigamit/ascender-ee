@@ -2,11 +2,12 @@
 version: 3
 images:
   base_image:
-    name: rockylinux:9
+    name: rockylinux:9-minimal
+options:
+  package_manager_path: /usr/bin/microdnf
 dependencies:
   python_interpreter:
     package_system: python3.11
-    python_path: /usr/bin/python3.11
   ansible_core:
     # Require minimum of 2.15 to get ansible-inventory --limit option
     package_pip: ansible-core>=2.15.0rc2,<2.16
@@ -49,13 +50,12 @@ dependencies:
     krb5-workstation [platform:rpm]
     libcurl-devel [platform:rpm compile]
     podman-remote [platform:rpm]
-    python3.11 [platform:rpm]
     python3.11-devel [platform:rpm compile]
+    python3.11-devel [platform:rpm compile]
+    python3.11-rpm [platform:rpm epel]
     python-unversioned-command [platform:rpm]
     rsync [platform:rpm]
     sshpass [platform:rpm]
-    subversion [platform:dpkg]
-    subversion [platform:rpm]
     unzip [platform:rpm]
     sudo [platform:rpm]
   python: |
@@ -75,6 +75,9 @@ dependencies:
     boto3
   exclude:
     system:
+      - python3
+      - python3-devel
+      - python3-rpm
       - iwl*
 additional_build_files:
   - src: sudoers
