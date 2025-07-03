@@ -4,6 +4,9 @@ images:
   base_image:
     name: rockylinux:9
 dependencies:
+  python_interpreter:
+    package_system: python3.11
+    python_path: /usr/bin/python3.11
   ansible_core:
     # Require minimum of 2.15 to get ansible-inventory --limit option
     package_pip: ansible-core>=2.15.0rc2,<2.16
@@ -38,6 +41,7 @@ dependencies:
         version: ">=3.15.0"
   system: |
     epel-release [platform:rpm]
+    python3.11-devel [platform:rpm compile]
     gcc [platform:rpm]
     gcc-c++ [platform:rpm]
     git-core [platform:rpm]
@@ -46,7 +50,6 @@ dependencies:
     krb5-workstation [platform:rpm]
     libcurl-devel [platform:rpm compile]
     podman-remote [platform:rpm]
-    python3.9-devel [platform:rpm compile]
     python-unversioned-command [platform:rpm]
     rsync [platform:rpm]
     sshpass [platform:rpm]
@@ -79,6 +82,7 @@ additional_build_steps:
     - COPY --from=quay.io/ansible/receptor:devel /usr/bin/receptor /usr/bin/receptor
     - RUN mkdir -p /var/run/receptor
     - RUN git lfs install --system
+    - RUN alternatives --install /usr/bin/python python /usr/bin/python3.11 311
     - ADD _build/configs/sudoers /etc/sudoers
     - RUN chmod 440 /etc/sudoers
     - RUN mkdir -p /runner
