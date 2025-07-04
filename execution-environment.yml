@@ -73,8 +73,7 @@ dependencies:
     six
     toml
     boto3
-    subversion [platform:dpkg]
-    subversion [platform:rpm]
+    subversion
   exclude:
     system:
       - python3
