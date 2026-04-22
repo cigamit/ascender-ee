@@ -1,5 +1,6 @@
 name: Build and Push latest image
 
+
 on:
   push:
     # build and push anytime commits are merged to devel
@@ -10,6 +11,8 @@ on:
 jobs:
   build_and_push_latest:
     runs-on: ubuntu-24.04
+    permissions:
+      packages: write
     name: Build and push latest tag from devel and on new commits
     steps:
       - uses: actions/checkout@v2
